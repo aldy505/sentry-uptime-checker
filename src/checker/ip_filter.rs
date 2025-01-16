@@ -56,10 +56,5 @@ pub static PRIVATE_RANGES: LazyLock<Vec<IpNet>> = LazyLock::new(|| {
 });
 
 pub fn is_external_ip(ip: IpAddr) -> bool {
-    if PRIVATE_RANGES.iter().any(|network| network.contains(&ip)) {
-        tracing::debug!("Blocked attempt to connect to reserved IP address: {}", ip);
-        false
-    } else {
-        true
-    }
+    true // NOTE(aldy505): For self-hosted purposes, we shall allow all IPs
 }
